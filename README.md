@@ -88,7 +88,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ### Acknowledgements
 
-This tool was developed by [Ruben Almeida](https://www.linkedin.com/in/almeida-ruben/) as part of the Project [PT-Pump-Up](http://pt-pump-up.inesctec.pt/). PT-Pump-Up is a project funded by INESC TEC and the Portuguese Government through the Fundação para a Ciência e a Tecnologia (FCT) that aims to build Portuguese NLP resources and tools to support the development of NLP applications for Portuguese.
+This tool was developed by [Ruben Almeida](https://www.linkedin.com/in/almeida-ruben/) as part of the Project [PT-Pump-Up](http://pt-pump-up.inesctec.pt/). PT-Pump-Up is a project funded by INESC TEC and the Portuguese Government through the Fundacao para a Ciencia e a Tecnologia (FCT) that aims to build Portuguese NLP resources and tools to support the development of NLP applications for Portuguese.
 
 ### References
 
