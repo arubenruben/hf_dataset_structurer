@@ -1,7 +1,6 @@
 # Hugging Face Dataset Structurer
 
-Hugging Face Dataset Structurer is a Python wrapper to simplify the process of deploying multi-config datasets to the Hugging Face Hub. We developed this tool because we found the official documentation to be lacking in detail and creating the perception the process requires a manual step to develop a dataset loading script. You don't need to do that! This tool will do it for you. 
-
+The Hugging Face Dataset Structurer is a Python wrapper designed to streamline the deployment of multi-config datasets to the Hugging Face Hub. This tool simplifies the process by automating the creation of dataset loading scripts, addressing gaps in the official documentation.
 
 ### Installation
 
@@ -11,7 +10,8 @@ pip install -U hf-dataset-structurer
 
 ### Quickstart
 
-In this example, we will create a bundle for Portuguese NER. Official HuggingFace HAREM dataset [entry](https://huggingface.co/datasets/harem) it's true name is "first-HAREM". We will create a bundle attaching the second-HAREM available [here](https://www.linguateca.pt/LivroSegundoHAREM/). This dataset has two labelling schemes, DEFAULT and SELECTIVE. Selective is just a coarse-grained version of DEFAULT. These two schemes turn this dataset a good candidate to demonstrate the power of this tool.
+Let's demonstrate the tool's capabilities using the Portuguese NER scenario. We'll create a consolidated dataset by merging the official HuggingFace HAREM dataset [entry](https://huggingface.co/datasets/harem), representing the findings of the First-HAREM meeting, with a complementary "second-HAREM" dataset, accessible [here](https://www.linguateca.pt/LivroSegundoHAREM/). This "second-HAREM," not initially included in the original HuggingFace efforts, brings valuable additional data. Both HAREM datasets offer two labeling schemes: DEFAULT and SELECTIVE, making them an ideal showcase for highlighting our tool's capabilities.
+
 
 ```python
 from datasets import load_dataset, concatenate_datasets, DatasetDict 
@@ -36,6 +36,10 @@ second_harem_selective = load_dataset("arubenruben/segundo_harem_selective")
 structurer.add_dataset_dict(second_harem_default, "segundo_harem_default")
 structurer.add_dataset_dict(second_harem_selective, "segundo_harem_selective")
 
+# Push to Hugging Face Hub
+structurer.push_to_hub()
+
+# After creating the bundle. You can append a dataset card to it.
 # Create Dataset Card to describe the dataset
 structurer.attach_dataset_card(
     language="pt",
@@ -46,10 +50,6 @@ structurer.attach_dataset_card(
     pretty_name="HAREM",
     multilinguality='monolingual'
 )
-
-# Push to Hugging Face Hub
-structurer.push_to_hub()
-
 ```
 
 ### API Reference

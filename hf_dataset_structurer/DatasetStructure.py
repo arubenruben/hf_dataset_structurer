@@ -33,8 +33,7 @@ class DatasetStructure:
             ValueError: If the config_name already exists in the dataset structure.
         """
         if config_name in self.config_names:
-            raise ValueError(f"config_name {config_name} already exists in {
-                             self.repo_name}")
+            raise ValueError(f"config_name {config_name} already exists in {self.repo_name}")
 
         self.dataset_dicts.append(dataset_dict)
         self.config_names.append(config_name)
