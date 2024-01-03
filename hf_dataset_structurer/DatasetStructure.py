@@ -4,12 +4,34 @@ from huggingface_hub import DatasetCard
 
 class DatasetStructure:
     def __init__(self, repo_name: str) -> None:
+        """
+        Initializes a new instance of the DatasetStructure class.
+
+        Args:
+            repo_name (str): The name of the repository.
+
+        Returns:
+            None
+        """
         self.repo_name = repo_name
         self.dataset_dicts = []
         self.config_names = []
         self.dataset_card = None
 
     def add_dataset_dict(self, dataset_dict: DatasetDict, config_name: str) -> None:
+        """
+        Adds a dataset dictionary to the dataset structure.
+
+        Args:
+            dataset_dict (DatasetDict): The dataset dictionary to add.
+            config_name (str): The name of the configuration.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: If the config_name already exists in the dataset structure.
+        """
         if config_name in self.config_names:
             raise ValueError(f"config_name {config_name} already exists in {
                              self.repo_name}")
@@ -18,9 +40,38 @@ class DatasetStructure:
         self.config_names.append(config_name)
 
     def add_dataset(self, dataset: Dataset, config_name: str, split: str = "train") -> None:
+        """
+        Adds a dataset to the dataset structure.
+
+        Args:
+            dataset (Dataset): The dataset to add.
+            config_name (str): The name of the configuration.
+            split (str, optional): The split of the dataset. Defaults to "train".
+
+        Returns:
+            None
+        """
         self.add_dataset_dict(DatasetDict({split: dataset}), config_name)
 
     def attach_dataset_card(self, language, license, annotations_creators, task_categories, tasks_ids, pretty_name, multilinguality='monolingual'):
+        """
+        Attaches a dataset card to the dataset structure.
+
+        Args:
+            language: The language of the dataset.
+            license: The license of the dataset.
+            annotations_creators: The creators of the annotations.
+            task_categories: The categories of the task.
+            tasks_ids: The IDs of the tasks.
+            pretty_name: The pretty name of the dataset.
+            multilinguality: The multilinguality of the dataset. Defaults to 'monolingual'.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: If no dataset card is found.
+        """
         self.dataset_card = DatasetCard.load(self.repo_name)
 
         if self.dataset_card is None:
@@ -36,7 +87,15 @@ class DatasetStructure:
         self.dataset_card.repo_type = "dataset"
 
     def push_to_hub(self, private: bool = False) -> None:
+        """
+        Pushes the dataset structure and dataset card to the Hugging Face Hub.
 
+        Args:
+            private (bool, optional): Whether to push the dataset structure as private. Defaults to False.
+
+        Returns:
+            None
+        """
         for dataset_dict, config_name in zip(self.dataset_dicts, self.config_names):
             dataset_dict.push_to_hub(
                 self.repo_name, config_name=config_name, set_default=False, private=private)
