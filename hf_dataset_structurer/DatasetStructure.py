@@ -53,18 +53,24 @@ class DatasetStructure:
         """
         self.add_dataset_dict(DatasetDict({split: dataset}), config_name)
 
-    def attach_dataset_card(self, language, license, annotations_creators, task_categories, tasks_ids, pretty_name, multilinguality='monolingual'):
+    def attach_dataset_card(self, language: str,
+                            license: str,
+                            annotations_creators: str,
+                            task_categories: str,
+                            tasks_ids: str,
+                            pretty_name: str,
+                            multilinguality: str = 'monolingual'):
         """
         Attaches a dataset card to the dataset structure.
 
         Args:
-            language: The language of the dataset.
-            license: The license of the dataset.
-            annotations_creators: The creators of the annotations.
-            task_categories: The categories of the task.
-            tasks_ids: The IDs of the tasks.
-            pretty_name: The pretty name of the dataset.
-            multilinguality: The multilinguality of the dataset. Defaults to 'monolingual'.
+            language (str): The language of the dataset.
+            license (str): The license of the dataset.
+            annotations_creators (str): The creators of the annotations.
+            task_categories (str): The categories of the task.
+            tasks_ids (str): The IDs of the tasks.
+            pretty_name (str): The pretty name of the dataset.
+            multilinguality (str, optional): The multilinguality of the dataset. Defaults to 'monolingual'.
 
         Returns:
             None
